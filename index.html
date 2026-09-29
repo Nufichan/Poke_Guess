@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Guess the Pokémon</title>
-  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XF9RXZ2047"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -52,7 +51,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .card:focus-visible{
   outline: 3px solid #fff; outline-offset:2px;
 }
 
-/* floating pokeballs layer */
 #pokeballs{position:fixed; inset:0; overflow:hidden; z-index:0; pointer-events:none;}
 .pokeball{
   position:absolute; width:56px; opacity:0.13; top:110%;
@@ -67,7 +65,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .card:focus-visible{
 .view.leaving{animation:viewOut 0.25s ease both;}
 @keyframes viewOut{to{opacity:0; transform:translateY(-10px);}}
 
-/* ---------- HOME ---------- */
 .home-hero{text-align:center; margin-bottom:6px;}
 .home-hero img{width:230px; max-width:70vw; filter:drop-shadow(0 8px 16px rgba(0,0,0,0.35));}
 .home-title{font-size:clamp(28px,6vw,44px); font-weight:800; text-shadow:0 4px 12px rgba(0,0,0,0.4); margin:6px 0 4px;}
@@ -101,7 +98,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .card:focus-visible{
 .home-socials a:hover{transform:translateY(-4px) scale(1.08); background:rgba(255,255,255,0.3);}
 .home-socials img{width:22px; height:22px;}
 
-/* ---------- BOARD ---------- */
 .board-top{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:12px; margin-bottom:18px;}
 .back-btn{
   display:flex; align-items:center; gap:6px; background:rgba(255,255,255,0.18); border:1px solid rgba(255,255,255,0.3);
@@ -168,7 +164,6 @@ footer.credit{margin-top:34px; font-size:12px; opacity:0.75; text-align:center; 
   *{animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important;}
 }
 
-/* ===== Floating music player (Safari Ball launcher) ===== */
 .music-launcher{
   position:fixed;
   right:max(20px, env(safe-area-inset-right));
@@ -280,7 +275,6 @@ footer.credit{margin-top:34px; font-size:12px; opacity:0.75; text-align:center; 
 <meta name="theme-color" content="#1d1b3a">
 </head>
 <body>
-<!-- ===== Floating music player ===== -->
 <button class="music-launcher" id="launcher" aria-label="Open music controls">
   <img class="music-launcher-icon" id="launcherIcon" src="https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/Photos/SFX/Meloetta.png" alt="Music menu">
 </button>
@@ -312,11 +306,8 @@ footer.credit{margin-top:34px; font-size:12px; opacity:0.75; text-align:center; 
 "use strict";
 const POKEBALL_IMG = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png";
 
-/* Base of the GitHub repo that hosts every photo. Change this one line if the repo moves. */
 const REPO_RAW_BASE = "https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/";
 
-/* Builds a Photos/<folder>/<name>.png URL. A "/" in a category label (e.g. "Paradox/UB")
-   becomes nested folders (Photos/Paradox/UB/...), matching the repo layout. */
 function photoUrl(folder, name){
   const segs = folder.split("/").map(encodeURIComponent);
   return REPO_RAW_BASE + "Photos/" + segs.join("/") + "/" + encodeURIComponent(name) + ".png";
@@ -325,22 +316,6 @@ function slugify(label){
   return label.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
 }
 
-/* ==========================================================================
-   ADD A NEW CATEGORY HERE — nothing else in this file needs to change.
-   - label: shown on the category card and board title, and used to build
-     its photo folder (Photos/<label>/...) unless you set "folder" below.
-   - folder: optional — only needed when the GitHub photo folder's name
-     doesn't match the label exactly (e.g. it uses "&" instead of "/").
-   - type: "pokemon" or "character" — controls the "X Pokémon"/"X Characters" text.
-   - accent: [primaryColor, secondaryColor] used for the category's background glow.
-   - names: exact Pokémon/character names — each maps straight to
-     Photos/<folder>/<name>.png in the repo, and the folder's Menu.png is
-     used as the category's card icon.
-   Music: a category automatically plays its dedicated track if roleTracks
-   (bottom of the file) has an entry whose name matches this category's id
-   (its slugified label, e.g. "za-mega" for "ZA Mega") — add one there when
-   you add the matching audio file. No entry = falls back to the home shuffle.
-   ========================================================================== */
 const CATEGORY_DEFS = [
   { label:"Starter", type:"pokemon", accent:["#3ddc84","#3b4cca"], names:["Venusaur","Charizard","Blastoise","Meganium","Feraligatr","Typhlosion","Sceptile","Blaziken","Swampert","Torterra","Infernape","Empoleon","Serperior","Emboar","Samurott","Chesnaught","Delphox","Greninja","Decidueye","Incineroar","Primarina","Rillaboom","Cinderace","Inteleon","Meowscarada","Skeledirge","Quaquaval","Browt","Pombon","Gecqua"] },
   { label:"Legendary", type:"pokemon", accent:["#a78bfa","#fbbf24"], names:["Mewtwo","Ho-Oh","Lugia","Galar Articuno","Galar Zapdos","Galar Moltres","Primal Groudon","Primal Kyogre","Mega Rayquaza","Dialga","Palkia","Giratina","Zekrom","Reshiram","Kyurem","Xerneas","Yveltal","Zygarde","Solgaleo","Lunala","Ultra Necrozma","Crowned Zacian","Crowned Zamazenta","Eternamax Eternatus","Regigigas","Calyrex Shadow","Calyrex Ice","Koraidon","Miraidon","Ogerpon"] },
@@ -373,7 +348,6 @@ const BG_SETS = {
 
 const app = document.getElementById('app');
 
-/* ---------- floating pokeballs ---------- */
 function initPokeballs(){
   const layer = document.getElementById('pokeballs');
   layer.innerHTML="";
@@ -395,7 +369,6 @@ function initPokeballs(){
   }
 }
 
-/* ---------- routing ---------- */
 function parseHash(){
   const h = location.hash.replace(/^#\/?/,'');
   if(!h) return {view:'home'};
@@ -441,7 +414,6 @@ function render(){
   }
 }
 
-/* ---------- HOME ---------- */
 function renderHome(){
   setBodyAccent(null);
   const view = document.createElement('div');
@@ -490,7 +462,6 @@ function renderHome(){
   });
 }
 
-/* ---------- BOARD ---------- */
 function renderBoard(catId){
   const cat = CATEGORIES.find(c=>c.id===catId);
   if(!cat){ navigate('#/'); return; }
@@ -608,7 +579,6 @@ const roleTracks = [
   {name: "champs-villains", src: "https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/Audio/Villain.m4a"},
   {name: "companion", src: "https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/Audio/Companion.m4a"}
 ];
-// Home-screen randomizer pool (region themes) - NOT the per-menu role tracks above
 const homeTracks = [
   {name: "Home 1", src: "https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/Audio/Home/1.m4a"},
   {name: "Home 2", src: "https://raw.githubusercontent.com/Nufichan/Poke_Guess2.0/main/Audio/Home/2.m4a"},
@@ -628,7 +598,7 @@ const tooltip=document.getElementById("tooltip");
 
 let current=-1;
 let open=false;
-let wasPlayingBeforeHidden=false; // tracks whether to auto-resume when the tab/window becomes visible again
+let wasPlayingBeforeHidden=false;
 music.volume=.25;
 
 
@@ -656,13 +626,13 @@ function findTrackByRole(role){
 
 function playRoleTrack(idx){
   current=idx;
-  music.loop=true; // this menu's track repeats forever, no switching
+  music.loop=true;
   music.src=roleTracks[idx].src;
   music.load();
 }
 
 function playRandomizer(){
-  music.loop=false; // home screen: keep picking a new random track forever
+  music.loop=false;
   chooseRandom();
 }
 
@@ -670,12 +640,9 @@ function applyMusicForRole(role){
   const idx=findTrackByRole(role);
   if(idx!==-1)playRoleTrack(idx);
   else playRandomizer();
-  setTimeout(startMusic,1000); // new track loaded - wait 3s before it starts (not a replay/resume)
+  setTimeout(startMusic,1000);
 }
 
-// Exposed so a single-page app can switch tracks on navigation without a
-// full page reload, e.g. window.PokeMusic.setRole('starter') on entering
-// the Starter page, and window.PokeMusic.setRole('') on returning home.
 window.PokeMusic={
   setRole:function(role){
     applyMusicForRole((role||"").trim().toLowerCase());
@@ -719,9 +686,6 @@ volumeButtons.forEach(btn=>{
   });
 });
 
-// Auto-stop the music when the tab/window is hidden or minimized (instead of
-// playing on unfocused in the background), and pick back up where it left
-// off once the page is visible again.
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden){
     wasPlayingBeforeHidden=!music.paused;
@@ -733,9 +697,7 @@ document.addEventListener("visibilitychange",()=>{
 });
 
 music.addEventListener("ended",()=>{
-  // Only reached on the home-screen randomizer (music.loop is true on
-  // every role-specific menu, so this never fires there). A new track is
-  // being loaded, so wait 3s before it starts, same as any other fresh start.
+
   chooseRandom();
   setTimeout(startMusic,1000);
 });
