@@ -1,6 +1,6 @@
-Poke_Guess2.0
+Poke_Guess
 
-Poke_Guess2.0 is a rewritten and improved version of my original game,  **Pokemon_Quizz**, inspired by a Minecraft "Guess the mob" game.
+Poke_Guess is a rewritten and improved version of my original game,  **Pokemon_Quizz**, inspired by a Minecraft "Guess the mob" game.
 
 It's mostly created using Claude ai, with help from my friends as im not really a coding guy. I just had the idea for the game and wanted to bring it to life.
 
